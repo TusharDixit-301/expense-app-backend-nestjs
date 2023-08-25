@@ -1,7 +1,7 @@
 // Purpose: To store the data in the application
 interface Data {
   report: {
-    id: number;
+    id: string;
     source: string;
     amount: number;
     createdAt: Date;
@@ -14,10 +14,10 @@ export enum ReportType {
   INCOME = 'income',
   EXPENSE = 'expense',
 }
- export const data: Data = {
+export const data: Data = {
   report: [
     {
-      id: 1,
+      id: '1',
       source: 'Salary',
       amount: 100000,
       createdAt: new Date(),
@@ -25,7 +25,7 @@ export enum ReportType {
       type: ReportType.INCOME,
     },
     {
-      id: 2,
+      id: '2',
       source: 'Youtube',
       amount: 10000,
       createdAt: new Date(),
@@ -33,7 +33,7 @@ export enum ReportType {
       type: ReportType.INCOME,
     },
     {
-      id: 3,
+      id: '3',
       source: 'Gaming',
       amount: 8000,
       createdAt: new Date(),
@@ -41,13 +41,13 @@ export enum ReportType {
       type: ReportType.EXPENSE,
     },
     {
-      id: 4,
+      id: '4',
       source: 'Food',
       amount: 29000,
       createdAt: new Date(),
       updatedAt: new Date(),
       type: ReportType.EXPENSE,
-    }
+    },
   ],
 };
 

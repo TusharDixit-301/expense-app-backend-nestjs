@@ -1,5 +1,14 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ReportType, data } from './data';
+import {v4 as uuid} from "uuid"
 @Controller('/report/:type')
 export class AppController {
   /**
@@ -13,21 +22,22 @@ export class AppController {
     return data.report.filter((item) => item.type === reportType);
   }
 
-  /** 
-    * The `@Get(':id')` decorator is used to define a GET endpoint for retrieving a specific report by its ID. 
-    * The `@Param('id')` decorator is used to define a parameter in the endpoint URL.
-    * In this case, it is defining a parameter called `id` in the endpoint URL.
-  */
+  /**
+   * The `@Get(':id')` decorator is used to define a GET endpoint for retrieving a specific report by its ID.
+   * The `@Param('id')` decorator is used to define a parameter in the endpoint URL.
+   * In this case, it is defining a parameter called `id` in the endpoint URL.
+   */
   @Get(':id')
-  getReportById(@Param('type') type: string, @Param('id') id: number) {
+  getReportById(@Param('type') type: string, @Param('id') id: string) {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     const dataByType = data.report.filter((item) => item.type === reportType);
-    return dataByType.find((report) => report.id === Number(id));
+    return dataByType.find((report) => report.id === id);
   }
-  
+
   @Post()
-  createReport() {
+  createReport(@Body() { amount, source }: { amount: number; source: string }) {
+    console.log(uuid());
     return 'Created';
   }
   @Put(':id')
