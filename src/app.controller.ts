@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
@@ -85,8 +86,18 @@ export class AppController {
     };
     return data.report[reportIndex];
   }
+  /**
+   * The `@HttpCode(204)` decorator is used to set the HTTP response code for the `deleteReport` method to 204 (No Content). This means that when the report is successfully deleted, the server will respond with a 204 status code, indicating that there is no content to send in the response body.
+   * The `@Delete(':id')` decorator is used to define a DELETE endpoint in the controller. It specifies that this endpoint will handle HTTP DELETE requests and expects an `id` parameter in the URL.
+   */
+  @HttpCode(204)
   @Delete(':id')
-  deleteReport() {
-    return 'Deleted';
+  deleteReport(@Param('id') id: string) {
+    const reportIndex = data.report.findIndex((report) => report.id === id);
+    if (reportIndex === -1) {
+      return 'Report not found';
+    }
+    data.report.splice(reportIndex, 1);
+    return 'Report deleted successfully';
   }
 }
