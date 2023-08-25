@@ -35,6 +35,12 @@ export class AppController {
     return dataByType.find((report) => report.id === id);
   }
 
+  /**
+   *  The `createReport` method is a POST endpoint handler in the `AppController` class. It is used to create a new report.
+   * The `@Post()` decorator is used to define a POST endpoint in the controller.
+   * The `@Body()` decorator is used to define the body of the request.
+   * In this case, it is defining the body of the request to be an object with the properties `amount` and `source`.
+   */
   @Post()
   createReport(
     @Body() { amount, source }: { amount: number; source: string },
@@ -51,9 +57,33 @@ export class AppController {
     data.report.push(newReport);
     return newReport;
   }
+
+  /**
+   * The `@Put(':id')` decorator is used to define a PUT endpoint in the controller. It specifies that this endpoint will handle HTTP PUT requests and expects an `id` parameter in the URL.
+   */
   @Put(':id')
-  updateReport() {
-    return 'Updated';
+  updateReport(
+    @Param('type') type: string,
+    @Param('id') id: string,
+    @Body() body: { amount: number; source: string },
+  ) {
+    const reportType =
+      type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
+    const reportToUpdate = data.report
+      .filter((item) => item.type === reportType)
+      .find((report) => report.id === id);
+    if (!reportToUpdate) {
+      return 'Report not found';
+    }
+    const reportIndex = data.report.findIndex(
+      (report) => report.id === reportToUpdate.id,
+    );
+
+    data.report[reportIndex] = {
+      ...data.report[reportIndex],
+      ...body,
+    };
+    return data.report[reportIndex];
   }
   @Delete(':id')
   deleteReport() {
