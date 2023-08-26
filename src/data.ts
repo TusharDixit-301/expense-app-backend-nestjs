@@ -19,7 +19,7 @@ export const data: Data = {
     {
       id: '1',
       source: 'Salary',
-      amount: 100000,
+      amount: 1000,
       createdAt: new Date(),
       updatedAt: new Date(),
       type: ReportType.INCOME,
@@ -27,7 +27,7 @@ export const data: Data = {
     {
       id: '2',
       source: 'Youtube',
-      amount: 10000,
+      amount: 1000,
       createdAt: new Date(),
       updatedAt: new Date(),
       type: ReportType.INCOME,
@@ -35,7 +35,7 @@ export const data: Data = {
     {
       id: '3',
       source: 'Gaming',
-      amount: 8000,
+      amount: 800,
       createdAt: new Date(),
       updatedAt: new Date(),
       type: ReportType.EXPENSE,
@@ -43,7 +43,7 @@ export const data: Data = {
     {
       id: '4',
       source: 'Food',
-      amount: 29000,
+      amount: 300,
       createdAt: new Date(),
       updatedAt: new Date(),
       type: ReportType.EXPENSE,
